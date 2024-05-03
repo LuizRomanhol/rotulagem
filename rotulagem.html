@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Editor de Rótulos</title>
+      <!-- Bootstrap CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Tailwind CSS -->
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+      <style>
+         .red-div {
+         width: 700px; /* Largura definida como 335 pixels */
+         height: 250px; /* Altura definida como 125 pixels */
+         }
+         .poetsen-one-regular {
+         font-family: "Poetsen One", sans-serif;
+         font-weight: 400;
+         font-style: normal;
+         }
+         .style-script-regular {
+         font-family: "Style Script", cursive;
+         font-weight: 400;
+         font-style: normal;
+         font-size: 24px;
+         
+         }
+         
+      </style>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <h1 class="text-center text-2xl p-5 fixed w-screen">Editor de Rótulos</h1>
+      <div class="flex justify-center items-center h-screen">
+         <div class="container mx-auto mt-5">
+            <div class="flex flex-wrap">
+               <!-- First Column -->
+               <div class="w-full md:w-1/2 p-4 flex justify-center">
+                  <div class="card p-4">
+                     <h2 class="text-xl mb-3">Informações do Rótulo</h2>
+                     <form>
+                        <div class="mb-3">
+                           <label for="tituloInput" class="form-label">Título:</label>
+                           <input value="Terra de Mamona" type="text" id="tituloInput" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                           <label for="conteudoInput" class="form-label">Conteúdo Líquido:</label>
+                           <input value="30ml" type="text" id="conteudoInput" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                           <label for="ingredientesInput" class="form-label">Ingredientes:</label>
+                           <input value="Sebo de Cavalo, Raiz de Ouro e Alecrim." type="text" id="ingredientesInput" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                           <label for="sugestaoInput" class="form-label">Sugestão de Uso:</label>
+                           <input value="20 gotas, 2 vezes ao dia." type="text" id="sugestaoInput" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                           <label for="corFundo" class="form-label">Cor do Fundo:</label>
+                           <input type="color" id="corFundo" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                           <label for="corBorda" class="form-label">Cor da Borda:</label>
+                           <input type="color" id="corBorda" class="form-control">
+                        </div>
+                        
+                       
+                     </form>
+                  </div>
+               </div>
+               <!-- Second Column -->
+               <div class="w-full md:w-1/2 p-4 justify-center">
+                  <div class="red-div bg-red-500 p-2" id ="borda">
+                     <div class="h-full rounded-lg text-white flex" id="fundo">
+                        <!-- Adicionando a div vermelha com o tamanho definido -->
+                        <div class="w-1/3 mb-4 flex flex-col h-full" id="ingredientesOutput"></div>
+                        <div class="w-fit mb-4 ml-auto mr-auto flex flex-col h-full" id="tituloOutput"></div>
+                        <div class="w-1/3 mb-4 flex flex-col h-full" id="conteudoOutput"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script>
+         const tituloInput = document.getElementById('tituloInput');
+         const sugestaoInput = document.getElementById('sugestaoInput');
+         const conteudoInput = document.getElementById('conteudoInput');
+         const ingredientesInput = document.getElementById('ingredientesInput');
+         const tituloOutput = document.getElementById('tituloOutput');
+         const sugestaoOutput = document.getElementById('sugestaoOutput');
+         const conteudoOutput = document.getElementById('conteudoOutput');
+         const ingredientesOutput = document.getElementById('ingredientesOutput');
+         const corFundoInput = document.getElementById('corFundo');
+         const corBordaInput = document.getElementById('corBorda');
+         const fundo = document.getElementById('fundo');
+         const borda = document.getElementById('borda');
+         
+         function updateOutput() {
+             const corFundoSelecionada = corFundoInput.value;
+             const corBordaSelecionada = corBordaInput.value;
+             borda.style.backgroundColor = corBordaSelecionada;
+             fundo.style.backgroundColor = corFundoSelecionada;
+         
+             tituloOutput.innerHTML = `<h3 class="text-center text-4xl break-normal poetsen-one-regular ">${tituloInput.value}</h3>
+             <p class="text-center items-end mt-auto poetsen-one-regular p-1">Conteudo Líquido ${conteudoInput.value}</p>`;
+             conteudoOutput.innerHTML = `<p class="text-right p-1 mb-1 text-lg style-script-regular"><b><em>Produto Natural</em></b></p><div class="mr-1 mt-auto mb-1 ml-auto flex justify-center items-center bg-yellow-200 rounded-full border-2 border-red-500 h-12 w-12 opacity-75" >🌿</div><div class="bg-white bg-opacity-100 rounded-lg m-1 h-12"></div>`;
+             ingredientesOutput.innerHTML = `<p class="text-left p-1 mb-1"><b>Ingredientes:</b> <br> ${ingredientesInput.value}</p><p class="m-1"><b>SUGESTÃO DE USO:</b> <br> ${sugestaoInput.value}</p><div class="bg-white bg-opacity-25 rounded-lg m-1 mt-auto h-16"></div>`;
+         }
+         
+         // Chama a função updateOutput quando o documento HTML terminar de carregar
+         document.addEventListener('DOMContentLoaded', updateOutput);
+         
+         // Atualiza os campos de saída quando o texto de entrada é alterado
+         tituloInput.addEventListener('input', updateOutput);
+         conteudoInput.addEventListener('input', updateOutput);
+         ingredientesInput.addEventListener('input', updateOutput);
+         sugestaoInput.addEventListener('input', updateOutput);
+         
+         // Adiciona ouvintes de eventos para os elementos input de cor de fundo e cor de borda
+         corFundoInput.addEventListener('input', updateOutput);
+         corBordaInput.addEventListener('input', updateOutput);
+      </script>
+   </body>
+</html>
